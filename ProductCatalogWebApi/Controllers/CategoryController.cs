@@ -14,14 +14,26 @@ namespace ProductCatalogWebApi.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
         public IActionResult Get([FromHeader] int a, [FromQuery] int b)
         {
             return Ok();
         }
         [HttpPost]
-        public IActionResult Post()
+        [Route("{id}")]
+        public IActionResult Post(int id, Category category)
         {
+            var existCategory = _productsDbContext.Categories.FirstOrDefault(c => c.Id == id);
+            
+            if(existCategory == null)
+            {
+                return NotFound();
+            }
+
+            existCategory.Name = category.Name;
+
+            _productsDbContext.Categories.Update(existCategory);
+            _productsDbContext.SaveChanges();
+
             return Ok();
         }
         [HttpPut]
