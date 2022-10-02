@@ -11,5 +11,20 @@ namespace ProductCatalogWebApi.Controllers
         {
             return Ok();
         }
+        [HttpPost]
+        public IActionResult Post()
+        {
+            return Ok();
+        }
+        [HttpPut]
+        public IActionResult Put()
+        {
+            return Ok();
+        }
+        [HttpDelete]
+        public IActionResult Delete()
+        {
+            return Ok();
+        }
     }
 }
