@@ -14,7 +14,8 @@ namespace ProductCatalogWebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        [Route("{id}")]
+        public IActionResult Get([FromHeader] int a, [FromQuery] int b)
         {
             return Ok();
         }
