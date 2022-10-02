@@ -14,9 +14,18 @@ namespace ProductCatalogWebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromHeader] int a, [FromQuery] int b)
+        public List<Category> Get()
         {
-            return Ok();
+            var categories = _productsDbContext.Categories.ToList();
+
+            return categories;
+        }
+        [HttpGet("{id}")]
+        public Category Get(int id)
+        {
+            var category = _productsDbContext.Categories.FirstOrDefault(x => x.Id == id);
+
+            return category;
         }
         [HttpPost]
         [Route("{id}")]
@@ -45,8 +54,19 @@ namespace ProductCatalogWebApi.Controllers
             return Ok();
         }
         [HttpDelete]
-        public IActionResult Delete()
+        [Route("{id}")]
+        public IActionResult Delete(int id)
         {
+            var existCategory = _productsDbContext.Categories.FirstOrDefault(c => c.Id == id);
+
+            if (existCategory == null)
+            {
+                return NotFound();
+            }
+
+            _productsDbContext.Categories.Remove(existCategory);
+            _productsDbContext.SaveChanges();
+
             return Ok();
         }
     }
