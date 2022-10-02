@@ -4,7 +4,7 @@ namespace ProductCatalogWebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CategoriesController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
