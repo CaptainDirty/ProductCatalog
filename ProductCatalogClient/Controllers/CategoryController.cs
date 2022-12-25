@@ -9,11 +9,12 @@ namespace ProductCatalogClient.Controllers
     public class CategoryController : Controller
     {
         private readonly ILogger<CategoryController> _logger;
-        private readonly IOptions<ProductCatalogWebApiConfig> _pcConfig;
+        private readonly IOptions<ProductCatalogWebApiConfig> _pcWebApiConfig;
 
-        public CategoryController(ILogger<CategoryController> logger, IOptions<ProductCatalogWebApiConfig> sc)
+        public CategoryController(ILogger<CategoryController> logger, IOptions<ProductCatalogWebApiConfig> pcWebApiConfig)
         {
             _logger = logger;
+            _pcWebApiConfig= pcWebApiConfig;
         }
 
         public IActionResult Index()
