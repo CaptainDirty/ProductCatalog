@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProductCatalogWebApi.Data
+namespace ProductCatalogData.Models
 {
     public class Product
     {

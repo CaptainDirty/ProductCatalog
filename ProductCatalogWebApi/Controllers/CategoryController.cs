@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProductCatalogData.Models;
 using ProductCatalogWebApi.Data;
 
 namespace ProductCatalogWebApi.Controllers

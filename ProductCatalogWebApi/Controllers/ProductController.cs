@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProductCatalogData.Models;
 using ProductCatalogWebApi.Data;
 
 namespace ProductCatalogWebApi.Controllers

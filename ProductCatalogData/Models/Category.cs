@@ -1,4 +1,4 @@
-﻿namespace ProductCatalogWebApi.Data
+﻿namespace ProductCatalogData.Models
 {
     public class Category
     {
