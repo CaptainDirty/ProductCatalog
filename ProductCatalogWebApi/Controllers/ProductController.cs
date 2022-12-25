@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProductCatalogWebApi.Data;
 
 namespace ProductCatalogWebApi.Controllers
@@ -16,7 +17,9 @@ namespace ProductCatalogWebApi.Controllers
         [HttpGet]
         public List<Product> Get()
         {
-            var products = _productsDbContext.Products.ToList();
+            var products = _productsDbContext.Products
+                .Include(x => x.Category)
+                .ToList();
 
             return products;
         }

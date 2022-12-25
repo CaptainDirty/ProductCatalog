@@ -1,7 +1,12 @@
+using ProductCatalogClient.Models.Config;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.Configure<ProductCatalogWebApiConfig>(builder.Configuration.GetSection("ProductCatalogWebApi"));
 
 var app = builder.Build();
 
