@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProductCatalogWebApi.Data;
 
 namespace ProductCatalogWebApi.Controllers
 {
@@ -6,24 +7,67 @@ namespace ProductCatalogWebApi.Controllers
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly ProductsDbContext _productsDbContext;
+        public ProductController(ProductsDbContext productsDbContext)
         {
-            return Ok();
+            _productsDbContext = productsDbContext;
         }
-        [HttpPost]
-        public IActionResult Post()
+
+        [HttpGet]
+        public List<Product> Get()
         {
+            var products = _productsDbContext.Products.ToList();
+
+            return products;
+        }
+        [HttpGet("{id}")]
+        public Product Get(int id)
+        {
+            var product = _productsDbContext.Products.FirstOrDefault(x => x.Id == id);
+
+            return product;
+        }
+        [HttpPost("{id}")]
+        public IActionResult Post(int id, Product product)
+        {
+            var existProduct = _productsDbContext.Products.FirstOrDefault(c => c.Id == id);
+
+            if (existProduct == null)
+            {
+                return NotFound();
+            }
+
+            existProduct.Name = product.Name;
+            existProduct.Type = product.Type;
+            existProduct.ExpirationDate = product.ExpirationDate;
+            existProduct.CategoryId = product.CategoryId;
+
+            _productsDbContext.Products.Update(existProduct);
+            _productsDbContext.SaveChanges();
+
             return Ok();
         }
         [HttpPut]
-        public IActionResult Put()
+        public IActionResult Put(Product product)
         {
+            _productsDbContext.Products.Add(product);
+            _productsDbContext.SaveChanges();
+
             return Ok();
         }
-        [HttpDelete]
-        public IActionResult Delete()
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
+            var existProduct = _productsDbContext.Products.FirstOrDefault(c => c.Id == id);
+
+            if (existProduct == null)
+            {
+                return NotFound();
+            }
+
+            _productsDbContext.Products.Remove(existProduct);
+            _productsDbContext.SaveChanges();
+
             return Ok();
         }
     }
